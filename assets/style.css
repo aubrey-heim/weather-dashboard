@@ -1,0 +1,15 @@
+aside {
+    background-color:lightgray;
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+
+.btn-group-vertical {
+    width:100%;
+}
+
+.btn-outline-secondary {
+    background-color: white;
+    text-align: left;
+    padding:10px;
+}
