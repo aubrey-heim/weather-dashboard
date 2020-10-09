@@ -2,14 +2,16 @@ var lastSearched = JSON.parse(localStorage.getItem("searchedCities"));
 
 if(lastSearched){
     searchedCitites = [lastSearched]
+    displayCity()
+    
 } else {
-    searchedCitites = ["ellensburg"]
+    searchedCitites = []
 }
-
 let city = searchedCitites[0]
+
 let currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
 
-displayCity()
+
 
 function displayCity(){
     $.ajax({
@@ -23,8 +25,10 @@ function displayCity(){
 $("#search").on("click", function(event){
     event.preventDefault();
     city = $("#search-input").val();
+    city = city.toLowerCase();
     currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
     displayCity();
+    searchedCitites.unshift(city);
 })
 
 
