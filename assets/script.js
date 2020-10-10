@@ -51,13 +51,12 @@ function displayCity(){
         }).then(function(response){
             console.log(response)
             for(let i=1; i<6; i++){
-                $(".weather-icon").clear
                 let date = moment().add(i,'days').format('l')
                 $("#day"+i).text(date)
                 let forecastTemp = (response.daily[i].temp.day - 273.15) * (9/5) + 32
                 $("#day"+i+"-temp").text("Temp: " + forecastTemp.toFixed(1) + "°F")
                 let iconcode = response.daily[i].weather[0].icon
-                $("#day"+ i + "-body").prepend($("<img>").attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon").attr("class", "weather-icon")) 
+                $("#weather-icon" + i).attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon")
                 let forecastHumidity = (response.daily[i].humidity)
                 $("#day"+i+"-humidity").text("Humidity: " + forecastHumidity.toFixed(0) + "%")
             }
