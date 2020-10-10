@@ -1,15 +1,13 @@
 let lastSearched = JSON.parse(localStorage.getItem("searchedCities"));
 
 if(lastSearched){
-    searchedCitites = lastSearched
+    searchedCitites = [lastSearched[0]]
 } else {
     searchedCitites = []
 }
 let city = searchedCitites[0]
 
-
 displayCity()
-
 
 function displayCity(){
     let currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
@@ -53,18 +51,27 @@ function displayCity(){
         }).then(function(response){
             console.log(response)
             for(let i=1; i<6; i++){
+                $(".weather-icon").clear
                 let date = moment().add(i,'days').format('l')
                 $("#day"+i).text(date)
                 let forecastTemp = (response.daily[i].temp.day - 273.15) * (9/5) + 32
                 $("#day"+i+"-temp").text("Temp: " + forecastTemp.toFixed(1) + "°F")
                 let iconcode = response.daily[i].weather[0].icon
-                $("#day"+ i + "-body").prepend($("<img>").attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon")) 
+                $("#day"+ i + "-body").prepend($("<img>").attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon").attr("class", "weather-icon")) 
                 let forecastHumidity = (response.daily[i].humidity)
                 $("#day"+i+"-humidity").text("Humidity: " + forecastHumidity.toFixed(0) + "%")
             }
         })
     })  
     $("#forecast").removeClass("hidden")
+    $("#button-list").empty()
+    for (let i=0; i<searchedCitites.length; i++) {
+        let buttonEl = $("<button>").attr("type", "button")
+        buttonEl.attr("class","btn capital btn-outline-secondary")
+        buttonEl.attr("id", searchedCitites[i])
+        buttonEl.text(searchedCitites[i])
+        $("#button-list").append(buttonEl)
+    }
 }   
     // let forecastQueryURL = 
 
@@ -74,7 +81,7 @@ $("#search").on("click", function(event){
     city = city.toLowerCase().trim();
     currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
     forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q="+ city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
-    displayCity();
     searchedCitites.unshift(city);
+    displayCity();
     localStorage.setItem("searchedCities", JSON.stringify(searchedCitites))
 })
