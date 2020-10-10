@@ -53,15 +53,18 @@ function displayCity(){
         }).then(function(response){
             console.log(response)
             for(let i=1; i<6; i++){
+                let date = moment().add(i,'days').format('l')
+                $("#day"+i).text(date)
                 let forecastTemp = (response.daily[i].temp.day - 273.15) * (9/5) + 32
                 $("#day"+i+"-temp").text("Temp: " + forecastTemp.toFixed(1) + "°F")
                 let iconcode = response.daily[i].weather[0].icon
-                $("#day"+i+"-icon").attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png")
+                $("#day"+ i + "-body").prepend($("<img>").attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon")) 
                 let forecastHumidity = (response.daily[i].humidity)
                 $("#day"+i+"-humidity").text("Humidity: " + forecastHumidity.toFixed(0) + "%")
             }
         })
     })  
+    $("#forecast").removeClass("hidden")
 }   
     // let forecastQueryURL = 
 
