@@ -53,7 +53,20 @@ function updateCurrent(response) {
     }).then(function(response){
         console.log(response)
         $("#current-uv").text(response.value)
-        })
+
+        if(response.value<=2){
+            $("#current-uv").css("background-color", "green")
+        } else if(response.value<=5){
+            $("#current-uv").css("background-color", "yellow")
+        }else if(response.value<=7){
+            $("#current-uv").css("background-color","orange")
+        } else if(response.value<=10){
+            $("#current-uv").css("background-color", "red")
+        } else if(response.value>10){
+            $("#current-uv").css("background-color", "violet")
+        }
+    })
+
     $("#city").text(response.name + " " + dayTime)
     let currentTemp = (response.main.temp - 273.15) * (9/5) + 32
     $("#current-temp").text("Temperature: " + currentTemp.toFixed(1) + "°F")
