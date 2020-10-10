@@ -1,7 +1,8 @@
 let lastSearched = JSON.parse(localStorage.getItem("searchedCities"));
 
 if(lastSearched){
-    searchedCitites = [lastSearched]   
+    searchedCitites = lastSearched
+    
 } else {
     searchedCitites = []
 }
