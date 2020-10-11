@@ -24,7 +24,7 @@ function displayCity(){
         $("#city").text(response.name + " " + day);
         let currentWeatherIcon = $("<img>")
         let currentIconcode = response.weather[0].icon
-        currentWeatherIcon.attr("src", "http://openweathermap.org/img/w/" + currentIconcode + ".png").attr("alt", "weather icon").attr("id", "current-weather-icon");
+        currentWeatherIcon.attr("src", "https://openweathermap.org/img/w/" + currentIconcode + ".png").attr("alt", "weather icon").attr("id", "current-weather-icon");
         $("#city").append(currentWeatherIcon)
         let currentTemp = (response.main.temp - 273.15) * (9/5) + 32;
         $("#current-temp").text("Temperature: " + currentTemp.toFixed(1) + "°F");
@@ -33,7 +33,7 @@ function displayCity(){
         $("#current-wind").text("Wind Speed: " + currentWind + " mph");
         let lat = response.coord.lat;
         let lon = response.coord.lon;
-        let UVQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" +lat +"&lon=" + lon + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b";
+        let UVQueryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" +lat +"&lon=" + lon + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b";
         $.ajax({
             url: UVQueryURL,
             method: "GET"
@@ -65,7 +65,7 @@ function displayCity(){
                 let forecastTemp = (response.daily[i].temp.day - 273.15) * (9/5) + 32;
                 $("#day"+i+"-temp").text("Temp: " + forecastTemp.toFixed(1) + "°F");
                 let iconcode = response.daily[i].weather[0].icon;
-                $("#weather-icon" + i).attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon");
+                $("#weather-icon" + i).attr("src", "https://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon");
                 let forecastHumidity = (response.daily[i].humidity);
                 $("#day"+i+"-humidity").text("Humidity: " + forecastHumidity.toFixed(0) + "%");
                 $("#forecast").removeClass("hidden");
