@@ -5,9 +5,13 @@ if(lastSearched){
 } else {
     searchedCitites = []
 }
+
 let city = searchedCitites[0]
 
+
 displayCity()
+
+
 
 function displayCity(){
     let currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
@@ -63,24 +67,35 @@ function displayCity(){
         })
     })  
     $("#forecast").removeClass("hidden")
+    
     $("#button-list").empty()
     for (let i=0; i<searchedCitites.length; i++) {
         let buttonEl = $("<button>").attr("type", "button")
-        buttonEl.attr("class","btn capital btn-outline-secondary")
+        buttonEl.attr("class","btn capital btn-outline-secondary city-button")
         buttonEl.attr("id", searchedCitites[i])
         buttonEl.text(searchedCitites[i])
         $("#button-list").append(buttonEl)
     }
+ 
+   $(".city-button").on("click", function(event){
+    event.preventDefault()
+    city = $(this).attr("id")
+    console.log(city)  
+    searchedCitites.unshift(city);
+    displayCity();
+})
 }   
-    // let forecastQueryURL = 
 
 $("#search").on("click", function(event){
     event.preventDefault();
     city = $("#search-input").val();
     city = city.toLowerCase().trim();
-    currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
-    forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q="+ city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
+    // currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
+    // forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q="+ city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b"
     searchedCitites.unshift(city);
     displayCity();
     localStorage.setItem("searchedCities", JSON.stringify(searchedCitites))
 })
+
+
+
