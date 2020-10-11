@@ -20,6 +20,10 @@ function displayCity(){
         console.log(response);
         let day = moment().format('l');
         $("#city").text(response.name + " " + day);
+        let currentWeatherIcon = $("<img>")
+        let currentIconcode = response.weather[0].icon
+        currentWeatherIcon.attr("src", "http://openweathermap.org/img/w/" + currentIconcode + ".png").attr("alt", "weather icon").attr("id", "current-weather-icon");
+        $("#city").append(currentWeatherIcon)
         let currentTemp = (response.main.temp - 273.15) * (9/5) + 32;
         $("#current-temp").text("Temperature: " + currentTemp.toFixed(1) + "°F");
         $("#current-humidity").text("Humidity: " + response.main.humidity + "%");
