@@ -1,17 +1,23 @@
 let lastSearched = JSON.parse(localStorage.getItem("searchedCities"));
 
+let city=""
+let uniqueCities = [];
+
 if(lastSearched){
     searchedCitites = [lastSearched[0]];
+    city = searchedCitites[0]
+    displayCity();
 } else {
     searchedCitites = [];
 }
 
-let city = searchedCitites[0];
-let uniqueCities = [];
 
-displayCity();
+
+
 
 function displayCity(){
+    $("#forecast").addClass("hidden")
+    $("#current").addClass("hidden")
     let currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b6a20b6fa343f5f3b06524bb9d62b04b";
     $.ajax({
         url: currentQueryURL,
@@ -50,6 +56,7 @@ function displayCity(){
                 $("#current-uv").css("background-color", "violet");
             }
         })
+        $("#current").removeClass("hidden");
         forecastQueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&appid=b6a20b6fa343f5f3b06524bb9d62b04b";
         $.ajax({
             url: forecastQueryURL,
@@ -65,10 +72,11 @@ function displayCity(){
                 $("#weather-icon" + i).attr("src", "http://openweathermap.org/img/w/" + iconcode + ".png").attr("alt", "weather icon");
                 let forecastHumidity = (response.daily[i].humidity);
                 $("#day"+i+"-humidity").text("Humidity: " + forecastHumidity.toFixed(0) + "%");
+                $("#forecast").removeClass("hidden");
             }
         })
     })  
-    $("#forecast").removeClass("hidden");
+    
     
     searchedCitites.forEach((c) => {
         if (!uniqueCities.includes(c)) {
