@@ -15,3 +15,8 @@
 .capital {
     text-transform: capitalize;
 }
+
+#current-uv {
+    padding: 8px;
+    border-radius: 5px;
+}
