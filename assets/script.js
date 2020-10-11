@@ -11,10 +11,6 @@ if(lastSearched){
     searchedCitites = [];
 }
 
-
-
-
-
 function displayCity(){
     $("#forecast").addClass("hidden")
     $("#current").addClass("hidden")
@@ -108,6 +104,7 @@ $("#search").on("click", function(event){
     city = $("#search-input").val();
     city = city.toLowerCase().trim();
     searchedCitites.unshift(city);
+    $(".form-inline")[0].reset();
     displayCity();
     localStorage.setItem("searchedCities", JSON.stringify(searchedCitites))
 })
