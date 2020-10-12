@@ -10,12 +10,12 @@ let uniqueCities = [];
 //checks if there are any previously searched cities in local storage
 if(lastSearched){
     //adds the most recently searched city to the searched cities array
-    searchedCitites = [lastSearched[0]];
+    searchedCities = [lastSearched[0]];
     //sets the city to the first value of searchedCities (the last searched city)
-    city = searchedCitites[0]
+    city = searchedCities[0]
     //calls the function which writes the city info to the page
     displayCity();
-} 
+}
 
 //creates function to write the city info to the page which is called when the page loads, when the search button is clicked, and when a city button is clicked
 function displayCity(){
@@ -114,7 +114,7 @@ function displayCity(){
     })  
     
     // goes through each of the values in the searchedCities array to only include each value once in the uniqueCities array
-    searchedCitites.forEach((c) => {
+    searchedCities.forEach((c) => {
         //checks to see if unique cities already includes that value
         if (!uniqueCities.includes(c)) {
             //if not - adds the value to uniqueCities
@@ -143,9 +143,11 @@ function displayCity(){
     //sets the city to the id of the button (the city name)
     city = $(this).attr("id")
     //adds the city to the front of the searched cities list
-    searchedCitites.unshift(city);
+    searchedCities.unshift(city);
     //calls the function which writes the city info to the page
     displayCity();
+    //stores the searchedCities array to local storage
+    localStorage.setItem("searchedCities", JSON.stringify(searchedCities))
 })
 }   
 //listens for clicks on the search button
@@ -157,11 +159,11 @@ $("#search").on("click", function(event){
     //sets the city to lower case and removes extra spaces
     city = city.toLowerCase().trim();
     //adds the new city to the front of the searchedCities array
-    searchedCitites.unshift(city);
+    searchedCities.unshift(city);
     //clears the form
     $(".form-inline")[0].reset();
     //calls the function which writes the city info to the page
     displayCity();
     //stores the searchedCities array to local storage
-    localStorage.setItem("searchedCities", JSON.stringify(searchedCitites))
+    localStorage.setItem("searchedCities", JSON.stringify(searchedCities))
 })
