@@ -1,21 +1,26 @@
+/* makes buttons the width of the container */
 .btn-group-vertical {
     width:100%;
 }
 
+/* styles buttons */
 .btn-outline-secondary {
     background-color: white;
     text-align: left;
     padding:10px;
 }
 
+/* hides elements as needed (weather dashboard) */
 .hidden {
     display: none;
 }
 
+/* capitalizes city names */
 .capital {
     text-transform: capitalize;
 }
 
+/* styles uv index background */
 #current-uv {
     padding: 8px;
     border-radius: 5px;
