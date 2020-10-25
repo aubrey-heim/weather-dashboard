@@ -61,6 +61,9 @@ SOFTWARE.
 
 ## Contact
 Aubrey Heim
+
 GitHub: https://github.com/aubrey-heim
+
 LinkedIn: https://www.linkedin.com/mynetwork/
+
 Portfolio: https://github.com/aubrey-heim/responsive-portfolio
