@@ -64,6 +64,6 @@ Aubrey Heim
 
 GitHub: https://github.com/aubrey-heim
 
-LinkedIn: https://www.linkedin.com/mynetwork/
+LinkedIn: https://www.linkedin.com/in/aubreyheim/
 
-Portfolio: https://github.com/aubrey-heim/portfolio
+Portfolio: https://aubrey-heim.github.io/portfolio/
